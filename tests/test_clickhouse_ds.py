@@ -3,7 +3,7 @@ import random
 import string
 import unittest
 import requests
-from common import DB_CREDENTIALS, break_dataset, ClickhouseTest
+from common import DB_CREDENTIALS, break_dataset
 from mindsdb_native import Predictor, F
 import gc
 
@@ -19,7 +19,15 @@ def random_string():
     )
 
 
-class TestClickhouse(ClickhouseTest):
+class TestClickhouse(unittest.TestCase):
+    def setUp(self):
+        self.USER = DB_CREDENTIALS['clickhouse']['user']
+        self.PASSWORD = DB_CREDENTIALS['clickhouse']['password']
+        self.HOST = DB_CREDENTIALS['clickhouse']['host']
+        self.PORT = int(DB_CREDENTIALS['clickhouse']['port'])
+        self.DATABASE = 'test_data'
+
+
     def test_clickhouse_ds(self):
         from mindsdb_datasources import ClickhouseDS
         LIMIT = 100

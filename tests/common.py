@@ -21,7 +21,7 @@ def break_dataset(df, null_cell_pct=0.2, stringify_numbers_pct=0.5):
     df = df.copy()
 
     n_rows, n_cols = df.shape
-    
+
     # Make cells null
     for i in range(n_rows):
         for j in range(n_cols):
@@ -34,14 +34,5 @@ def break_dataset(df, null_cell_pct=0.2, stringify_numbers_pct=0.5):
             if isinstance(df.iloc[i, j], (float, int)):
                 if random.random() <= stringify_numbers_pct:
                     df.iloc[i, j] = str(df.iloc[i, j])
-    
+
     return df
-
-
-class ClickhouseTest(unittest.TestCase):
-    def setUp(self):
-        self.USER = DB_CREDENTIALS['clickhouse']['user']
-        self.PASSWORD = DB_CREDENTIALS['clickhouse']['password']
-        self.HOST = DB_CREDENTIALS['clickhouse']['host']
-        self.PORT = int(DB_CREDENTIALS['clickhouse']['port'])
-        self.DATABASE = 'test_data'
