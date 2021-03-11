@@ -1,5 +1,5 @@
 import unittest
-from mindsdb_datasources import F
+from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 

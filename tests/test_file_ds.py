@@ -19,7 +19,6 @@ class TestFileDS(unittest.TestCase):
     def tearDownClass(cls):
         os.remove(cls.issued_csv)
 
-    # test for https://github.com/mindsdb/mindsdb_native/issues/347
     def test_file_ds_with_issued_csv(self):
         ds = FileDS(self.issued_csv)
         try:

@@ -1,5 +1,5 @@
 import unittest
-from mindsdb_datasources import Predictor, F
+from mindsdb_native import Predictor, F
 from common import DB_CREDENTIALS
 from mindsdb_datasources import MongoDS
 
@@ -32,7 +32,7 @@ class TestMongoDB(unittest.TestCase):
 
         assert len(mongodb_ds.filter([['rental_price', '>', 2500]], 3)) == 3
         assert len(mongodb_ds.filter([['initial_price', '<', 0]], 3)) == 0
-    
+
     def test_mongodb_atlas_ds(self):
         USER = DB_CREDENTIALS['mongodb_atlas']['user']
         PASSWORD = DB_CREDENTIALS['mongodb_atlas']['password']

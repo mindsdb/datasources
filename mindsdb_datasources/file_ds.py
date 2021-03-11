@@ -9,7 +9,6 @@ import pandas as pd
 import requests
 
 from mindsdb_datasources import DataSource
-from mindsdb_native.libs.data_types.mindsdb_logger import log
 
 
 def clean_row(row):
@@ -82,8 +81,8 @@ class FileDS(DataSource):
         try:
             return self._handle_source()
         except Exception as e:
-            log.error(f"Error creating dataframe from handled data: {e}")
-            log.error("pd.read_csv data handler would be used.")
+            print(f"Error creating dataframe from handled data: {e}")
+            print("pd.read_csv data handler would be used.")
             df = pd.read_csv(self.file, sep=self.dialect.delimiter)
             col_map = dict((col, col) for col in df.columns)
             return df, col_map
@@ -123,7 +122,7 @@ class FileDS(DataSource):
                     data = BytesIO(fp.read())
             except Exception as e:
                 error = 'Could not load file, possible exception : {exception}'.format(exception = e)
-                log.error(error)
+                print(error)
                 raise ValueError(error)
 
 
@@ -169,8 +168,8 @@ class FileDS(DataSource):
                 data = StringIO(byte_str.decode('utf-8'))
 
         except Exception:
-            log.error(traceback.format_exc())
-            log.error('Could not load into string')
+            print(traceback.format_exc())
+            print('Could not load into string')
 
         # see if its JSON
         buffer = data.read(100)
@@ -214,8 +213,8 @@ class FileDS(DataSource):
             return data, None, dialect
         except Exception:
             data.seek(0)
-            log.error('Could not detect format for this file')
-            log.error(traceback.format_exc())
+            print('Could not detect format for this file')
+            print(traceback.format_exc())
             # No file type identified
             return data, None, dialect
 

@@ -4,7 +4,7 @@ import string
 import unittest
 import requests
 from common import DB_CREDENTIALS, break_dataset, ClickhouseTest
-from mindsdb_datasources import Predictor, F
+from mindsdb_native import Predictor, F
 import gc
 
 
