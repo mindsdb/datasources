@@ -4,7 +4,7 @@ from google.cloud import storage
 from google.oauth2 import service_account
 import json
 
-from mindsdb_datasources import DataSource, FileDS
+from mindsdb_datasources.datasources.data_source import DataSource, FileDS
 from mindsdb_datasources import F
 
 

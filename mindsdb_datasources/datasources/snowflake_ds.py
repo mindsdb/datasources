@@ -1,6 +1,6 @@
 import os
 
-from mindsdb_datasources import SQLDataSource
+from mindsdb_datasources.datasources.data_source import SQLDataSource
 
 
 class SnowflakeDS(SQLDataSource):

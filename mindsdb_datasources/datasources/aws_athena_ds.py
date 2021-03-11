@@ -1,7 +1,7 @@
 from pyathena import connect
 from pyathena.pandas.util import as_pandas
 
-from mindsdb_datasources import SQLDataSource
+from mindsdb_datasources.datasources.data_source import SQLDataSource
 
 
 class AthenaDS(SQLDataSource):

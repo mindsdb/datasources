@@ -1,10 +1,10 @@
 import pandas as pd
 import mysql.connector
 
-from mindsdb_datasources import SQLDataSource
+from mindsdb_datasources.datasources.data_source import SQLDataSource
 
 
-class MariaDS(SQLDataSource):
+class MySqlDS(SQLDataSource):
     def __init__(self, query, database='mysql', host='localhost',
                  port=3306, user='root', password=''):
         super().__init__(query)
@@ -22,11 +22,11 @@ class MariaDS(SQLDataSource):
             password=self.password,
             database=self.database
         )
-    
+
         df = pd.read_sql(q, con=con)
         con.close()
 
         return df, self._make_colmap(df)
 
     def name(self):
-        return 'MariaDB - {}'.format(self._query)
+        return 'MySQL - {}'.format(self._query)

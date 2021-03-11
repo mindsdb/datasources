@@ -4,7 +4,7 @@ import boto3
 from botocore import UNSIGNED
 from botocore.client import Config
 
-from mindsdb_datasources import DataSource, FileDS
+from mindsdb_datasources.datasources.data_source import DataSource, FileDS
 from mindsdb_datasources import F
 
 

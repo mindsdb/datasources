@@ -8,7 +8,7 @@ import traceback
 import pandas as pd
 import requests
 
-from mindsdb_datasources import DataSource
+from mindsdb_datasources.datasources.data_source import DataSource
 
 
 def clean_row(row):
