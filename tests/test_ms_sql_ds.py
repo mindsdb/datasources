@@ -1,14 +1,14 @@
 import os
 import unittest
 import logging
-from mindsdb_native import Predictor
-from mindsdb_native import F
+from mindsdb_datasources import Predictor
+from mindsdb_datasources import F
 from common import DB_CREDENTIALS, break_dataset
 
 
 class TestMSSQL(unittest.TestCase):
     def test_mssql_ds(self):
-        from mindsdb_native import MSSQLDS
+        from mindsdb_datasources import MSSQLDS
 
         HOST = DB_CREDENTIALS['mssql']['host']
         USER = DB_CREDENTIALS['mssql']['user']

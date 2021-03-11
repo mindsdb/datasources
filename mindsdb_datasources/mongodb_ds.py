@@ -5,7 +5,7 @@ import pandas as pd
 from pymongo import MongoClient
 from pandas.api.types import is_numeric_dtype
 
-from mindsdb_native.libs.data_types.data_source import DataSource
+from mindsdb_datasources import DataSource
 
 class MongoDS(DataSource):
     def __init__(self, query, collection, database='database',

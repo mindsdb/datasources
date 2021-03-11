@@ -1,7 +1,7 @@
 import pandas as pd
 import mysql.connector
 
-from mindsdb_native.libs.data_types.data_source import SQLDataSource
+from mindsdb_datasources import SQLDataSource
 
 
 class MariaDS(SQLDataSource):

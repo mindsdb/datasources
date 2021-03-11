@@ -1,6 +1,6 @@
 import pandas as pd
 import pymssql
-from mindsdb_native.libs.data_types.data_source import SQLDataSource
+from mindsdb_datasources import SQLDataSource
 
 
 class MSSQLDS(SQLDataSource):

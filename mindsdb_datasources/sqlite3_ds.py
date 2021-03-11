@@ -1,7 +1,7 @@
 import pandas as pd
 from sqlite3 import connect
 
-from mindsdb_native.libs.data_types.data_source import SQLDataSource
+from mindsdb_datasources import SQLDataSource
 
 class SQLite3DS(SQLDataSource):
     def __init__(self, query, database):

@@ -1,5 +1,5 @@
 import unittest
-from mindsdb_native import F
+from mindsdb_datasources import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -13,7 +13,7 @@ class TestMYSQL(unittest.TestCase):
         self.TABLE = 'us_health_insurance'
 
     def test_mysql_ds(self):
-        from mindsdb_native import MySqlDS
+        from mindsdb_datasources import MySqlDS
 
         LIMIT = 400
 

@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from mindsdb_native import FileDS
+from mindsdb_datasources import FileDS
 
 
 class TestFileDS(unittest.TestCase):

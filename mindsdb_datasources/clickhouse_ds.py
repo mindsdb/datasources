@@ -1,8 +1,7 @@
 import pandas as pd
 import requests
 
-from mindsdb_native.libs.data_types.data_source import SQLDataSource
-from mindsdb_native.libs.data_types.mindsdb_logger import log
+from mindsdb_datasources import SQLDataSources
 
 
 class ClickhouseDS(SQLDataSource):

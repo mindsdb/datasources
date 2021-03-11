@@ -4,7 +4,7 @@ import string
 import unittest
 import requests
 from common import DB_CREDENTIALS, break_dataset, ClickhouseTest
-from mindsdb_native import Predictor, F
+from mindsdb_datasources import Predictor, F
 import gc
 
 
@@ -21,7 +21,7 @@ def random_string():
 
 class TestClickhouse(ClickhouseTest):
     def test_clickhouse_ds(self):
-        from mindsdb_native import ClickhouseDS
+        from mindsdb_datasources import ClickhouseDS
         LIMIT = 100
 
         clickhouse_ds = ClickhouseDS(
@@ -50,7 +50,7 @@ class TestClickhouse(ClickhouseTest):
 
     def test_database_history(self):
         return
-        from mindsdb_native import ClickhouseDS
+        from mindsdb_datasources import ClickhouseDS
 
         TEMP_DB = 'test_database_history_' + random_string()
         TEMP_TABLE = 'tmp_test_database_history_' + random_string()

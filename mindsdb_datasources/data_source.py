@@ -1,17 +1,56 @@
+import json
+import ast
 from copy import deepcopy
 
 import pandas as pd
+import numpy as np
 import moz_sql_parser
 from moz_sql_parser.keywords import binary_ops
 import traceback
 
-from mindsdb_native.libs.constants.mindsdb import (
-    DATA_TYPES_SUBTYPES,
-    DATA_TYPES,
-    DATA_SUBTYPES
-)
-from mindsdb_native.libs.data_types.mindsdb_logger import log
-from mindsdb_native.libs.helpers.json_helpers import unnest_df
+
+def try_convert_to_dict(val):
+    if isinstance(val, dict):
+        return val
+    if pd.notnull(val):
+        try:
+            obj = json.loads(val)
+            if isinstance(obj, dict):
+                return obj
+            else:
+                raise Exception('Not a json dictionary (could be an int because json.loads is weird)!')
+        except Exception as e:
+            obj = ast.literal_eval(val)
+            if isinstance(obj, dict):
+                return obj
+            else:
+                raise Exception('Expression failed to evaluate to a dictionary')
+            return obj
+    else:
+        return {}
+
+
+def unnest_df(df):
+    original_columns = df.columns
+    unnested = 0
+    for col in original_columns:
+        try:
+            json_col = df[col].apply(try_convert_to_dict)
+            if np.sum(len(x) for x in json_col) == 0:
+                raise Exception('Empty column !')
+        except Exception as e:
+            continue
+
+        unnested += 1
+        unnested_df = pd.json_normalize(json_col)
+        unnested_df.columns = [col + '.' + str(subcol) for subcol in unnested_df.columns]
+        df = df.drop(columns=[col])
+
+        for unnested_col in unnested_df.columns:
+            df[unnested_col] = unnested_df[unnested_col]
+
+    return df, unnested
+
 
 def unnest(df, col_map):
     df, unnested = unnest_df(df)
@@ -47,23 +86,6 @@ class DataSource:
         for col in df.columns:
             col_map[col] = col
         return col_map
-
-    def set_subtypes(self, data_subtypes):
-        """
-        :param data_subtypes: dict
-        """
-        for col, subtype in data_subtypes.items():
-            if col not in self._col_map:
-                log.warning(f'Column {col} not present in your data, ignoring the "{subtype}" subtype you specified for it')
-                continue
-
-            for type_, type_subtypes in DATA_TYPES_SUBTYPES.items():
-                if subtype in type_subtypes:
-                    self.data_types[col] = type_
-                    self.data_subtypes[col] = subtype
-                    break
-            else:
-                raise ValueError(f'Invalid data subtype: {subtype}')
 
     def _extract_and_map(self):
         if self._internal_df is None:
@@ -203,7 +225,7 @@ class SQLDataSource(DataSource):
                 op_json = binary_ops.get(op, None)
 
                 if op_json is None:
-                    log.warning(f"Operator: {op} not found in the sql parser operator list\n Using it anyway.")
+                    print(f"Operator: {op} not found in the sql parser operator list\n Using it anyway.")
                     op_json = op
 
                 if op == 'like':

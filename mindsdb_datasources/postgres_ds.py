@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pg8000
 
-from mindsdb_native.libs.data_types.data_source import SQLDataSource
+from mindsdb_datasources import SQLDataSource
 
 
 class PostgresDS(SQLDataSource):

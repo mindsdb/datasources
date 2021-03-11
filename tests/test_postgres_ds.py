@@ -1,5 +1,5 @@
 import unittest
-from mindsdb_native import F
+from mindsdb_datasources import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -13,7 +13,7 @@ class TestPostgres(unittest.TestCase):
         self.TABLE = 'home_rentals'
 
     def test_postgres_ds(self):
-        from mindsdb_native import PostgresDS
+        from mindsdb_datasources import PostgresDS
 
         LIMIT = 100
 

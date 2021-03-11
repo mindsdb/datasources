@@ -1,7 +1,7 @@
 import unittest
-from mindsdb_native import Predictor, F
+from mindsdb_datasources import Predictor, F
 from common import DB_CREDENTIALS
-from mindsdb_native import MongoDS
+from mindsdb_datasources import MongoDS
 
 
 class TestMongoDB(unittest.TestCase):

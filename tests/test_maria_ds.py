@@ -1,5 +1,5 @@
 import unittest
-from mindsdb_native import F
+from mindsdb_datasources import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -13,7 +13,7 @@ class TestMariaDB(unittest.TestCase):
         self.TABLE = 'hdi'
 
     def test_maria_ds(self):
-        from mindsdb_native import MariaDS
+        from mindsdb_datasources import MariaDS
 
         LIMIT = 200
 

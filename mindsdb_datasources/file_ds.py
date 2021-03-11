@@ -8,7 +8,7 @@ import traceback
 import pandas as pd
 import requests
 
-from mindsdb_native.libs.data_types.data_source import DataSource
+from mindsdb_datasources import DataSource
 from mindsdb_native.libs.data_types.mindsdb_logger import log
 
 

@@ -11,7 +11,7 @@ class TestSnowflake(unittest.TestCase):
             print('Snowflake datasource (SnowflakeDS) can\'t be used on windows at the moment due to the connector not working')
             return
 
-        from mindsdb_native import SnowflakeDS
+        from mindsdb_datasources import SnowflakeDS
 
         # Create the datasource
         snowflake_ds = SnowflakeDS(
