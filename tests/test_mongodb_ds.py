@@ -1,6 +1,6 @@
 import unittest
 from mindsdb_native import Predictor, F
-from . import DB_CREDENTIALS
+from common import DB_CREDENTIALS
 from mindsdb_native import MongoDS
 
 

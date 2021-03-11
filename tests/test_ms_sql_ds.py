@@ -3,7 +3,7 @@ import unittest
 import logging
 from mindsdb_native import Predictor
 from mindsdb_native import F
-from . import DB_CREDENTIALS, break_dataset
+from common import DB_CREDENTIALS, break_dataset
 
 
 class TestMSSQL(unittest.TestCase):

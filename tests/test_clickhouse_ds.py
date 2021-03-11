@@ -3,7 +3,7 @@ import random
 import string
 import unittest
 import requests
-from . import DB_CREDENTIALS, break_dataset, ClickhouseTest
+from common import DB_CREDENTIALS, break_dataset, ClickhouseTest
 from mindsdb_native import Predictor, F
 import gc
 

@@ -51,16 +51,10 @@ jobs:
       shell: bash
       env:
         CHECK_FOR_UPDATES: False
-    - name: Install lightwood/staging if it's not mindsdb_native/stable
-      if: github.ref != 'refs/heads/stable'
-      run: |
-          pip install git+https://github.com/mindsdb/lightwood.git@staging --upgrade --no-cache-dir
-      env:
-        CHECK_FOR_UPDATES: False
     - name: Run unit tests
       run: |
           cd tests
-          python -m unittest discover unit_tests
+          python -m unittest discover .
           cd ..
       shell: bash
       env:

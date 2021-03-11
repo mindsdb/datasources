@@ -1,7 +1,7 @@
 import os
 import unittest
 import mindsdb_native
-from . import DB_CREDENTIALS, break_dataset
+from common import DB_CREDENTIALS, break_dataset
 
 
 class TestSnowflake(unittest.TestCase):

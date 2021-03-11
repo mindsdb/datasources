@@ -1,6 +1,6 @@
 import unittest
 from mindsdb_native import F
-from . import DB_CREDENTIALS, break_dataset
+from common import DB_CREDENTIALS, break_dataset
 
 
 class TestPostgres(unittest.TestCase):
