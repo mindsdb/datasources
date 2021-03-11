@@ -10,7 +10,6 @@ import requests
 
 from mindsdb_datasources.datasources.data_source import DataSource
 
-
 def clean_row(row):
     n_row = []
     for cell in row:
