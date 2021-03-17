@@ -5,6 +5,8 @@ from mindsdb_datasources.datasources.clickhouse_ds import ClickhouseDS
 from mindsdb_datasources.datasources.file_ds import FileDS
 from mindsdb_datasources.datasources.sqlite3_ds import SQLite3DS
 
+from mindsdb_native.__about__ import __package_name__ as name, __version__
+
 # These might not initialized properly since they require optional dependencies, so we wrap them in a try-except
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
