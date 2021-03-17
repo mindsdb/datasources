@@ -13,9 +13,11 @@ class MSSQLDS(SQLDataSource):
         self.user = user
         self.password = password
 
+
     def query(self, q):
         with pymssql.connect(server=self.host, host=self.host, user=self.user, password=self.password, database=self.database, port=self.port) as con:
             df = pd.read_sql(q, con=con)
+            
         return df, self._make_colmap(df)
 
     def name(self):
