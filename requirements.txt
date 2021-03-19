@@ -9,6 +9,6 @@ python-dateutil<2.8.1,>=2.1
 mysql-connector-python >= 8.0.20
 moz_sql_parser >= 3.0.0, < 4.1.20329
 pg8000 >= 1.15.3
-pymongo[tsl, srv] >= 3.10.1
+pymongo[tls, srv] >= 3.10.1
 dnspython
 certifi
