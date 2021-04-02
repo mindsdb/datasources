@@ -2,6 +2,7 @@ import os
 
 import pandas as pd
 from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
 
 from mindsdb_datasources.datasources.data_source import SQLDataSource
 
@@ -20,7 +21,10 @@ class ScyllaDS(SQLDataSource):
         self.password = password
 
     def query(self, q):
-        cluster = Cluster([self.host])
+        auth_provider = PlainTextAuthProvider(
+            username=self.user, password=self.password
+        )
+        cluster = Cluster([self.host], auth_provider=auth_provider)
         session = cluster.connect()
 
         if isinstance(self.keyspace, str) and len(self.keyspace) > 0:
