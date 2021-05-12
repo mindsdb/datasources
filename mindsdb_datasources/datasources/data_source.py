@@ -191,7 +191,7 @@ class DataSource:
         try:
             return super().__getattribute__(attr)
         except AttributeError:
-            return getattr(self.df, attr)
+            return getattr(self._internal_df, attr)
 
     def __getitem__(self, key):
         """
