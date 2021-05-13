@@ -55,3 +55,9 @@ try:
 except ImportError:
     print("Google Cloud Storage Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     GCSDS = None
+
+try:
+    from mindsdb_datasources.datasources.scylla_ds import ScyllaDS
+except ImportError:
+    print("ScyllaDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    ScyllaDS = None

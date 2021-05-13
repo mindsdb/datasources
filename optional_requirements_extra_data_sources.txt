@@ -3,3 +3,4 @@ PyAthena >= 2.0.0
 google-cloud-storage
 google-auth
 pymssql >= 2.1.4
+scylla-driver
