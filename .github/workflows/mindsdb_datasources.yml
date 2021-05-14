@@ -31,6 +31,7 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
       env:
@@ -47,6 +48,7 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "macOS" ]; then
           pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
           brew install libomp;
         fi
       shell: bash
