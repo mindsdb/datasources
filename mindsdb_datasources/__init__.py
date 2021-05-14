@@ -59,11 +59,11 @@ except ImportError:
 try:
     from mindsdb_datasources.datasources.scylla_ds import ScyllaDS
 except ImportError:
-    print("ScyllaDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    print("ScyllaDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[scylla]")
     ScyllaDS = None
 
 try:
     from mindsdb_datasources.datasources.cassandra_ds import CassandraDS
 except ImportError:
-    print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
