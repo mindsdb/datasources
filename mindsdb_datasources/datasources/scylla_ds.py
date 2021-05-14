@@ -24,7 +24,7 @@ class ScyllaDS(SQLDataSource):
         auth_provider = PlainTextAuthProvider(
             username=self.user, password=self.password
         )
-        cluster = Cluster([self.host], auth_provider=auth_provider)
+        cluster = Cluster([self.host], port=self.port, auth_provider=auth_provider)
         session = cluster.connect()
 
         if isinstance(self.keyspace, str) and len(self.keyspace) > 0:
