@@ -40,6 +40,8 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           pip install torch==1.7.0+cpu torchvision==0.8.1+cpu -f https://download.pytorch.org/whl/torch_stable.html;
+          pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
       env:
