@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.6,3.7,3.8]
+        python-version: [3.7,3.8]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,6 +31,7 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
       env:
@@ -39,6 +40,8 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           pip install torch==1.7.0+cpu torchvision==0.8.1+cpu -f https://download.pytorch.org/whl/torch_stable.html;
+          pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
       env:
@@ -47,6 +50,7 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "macOS" ]; then
           pip install -r optional_requirements_snowflake.txt;
+          pip install -r optional_requirements_cassandra.txt;
           brew install libomp;
         fi
       shell: bash
@@ -55,7 +59,7 @@ jobs:
     - name: Run unit tests
       run: |
           cd tests
-          #python -m unittest discover .
+          python -m unittest discover .
           cd ..
       shell: bash
       env:
