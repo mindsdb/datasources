@@ -3,3 +3,4 @@ include requirements_test.txt
 include optional_requirements_snowflake.txt
 include optional_requirements_extra_data_sources.txt
 include optional_requirements_scylla.txt
+include optional_requirements_cassandra.txt
