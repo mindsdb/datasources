@@ -1,6 +1,6 @@
 __title__ = 'mindsdb_datasources'
 __package_name__ = 'mindsdb_datasources'
-__version__ = '1.2.3'
+__version__ = '1.2.4'
 __description__ = "Datasources for mindsdb"
 __email__ = "jorge@mindsdb.com"
 __author__ = 'MindsDB Inc'
