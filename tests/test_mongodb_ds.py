@@ -33,26 +33,26 @@ class TestMongoDB(unittest.TestCase):
         assert len(mongodb_ds.filter([['rental_price', '>', 2500]], 3)) == 3
         assert len(mongodb_ds.filter([['initial_price', '<', 0]], 3)) == 0
 
-    def test_mongodb_atlas_ds(self):
-        USER = DB_CREDENTIALS['mongodb_atlas']['user']
-        PASSWORD = DB_CREDENTIALS['mongodb_atlas']['password']
-        HOST = DB_CREDENTIALS['mongodb_atlas']['host']
-        PORT = int(DB_CREDENTIALS['mongodb_atlas']['port'])
-        DATABASE = 'sample_restaurants'
-        COLLECTION = 'restaurants'
-        atlas_ds = MongoDS(
-            collection=COLLECTION,
-            query={"grades": []},
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DATABASE,
-            limit=5,
-                )
-        assert len(atlas_ds.df) == 5
+    # def test_mongodb_atlas_ds(self):
+    #     USER = DB_CREDENTIALS['mongodb_atlas']['user']
+    #     PASSWORD = DB_CREDENTIALS['mongodb_atlas']['password']
+    #     HOST = DB_CREDENTIALS['mongodb_atlas']['host']
+    #     PORT = int(DB_CREDENTIALS['mongodb_atlas']['port'])
+    #     DATABASE = 'sample_restaurants'
+    #     COLLECTION = 'restaurants'
+    #     atlas_ds = MongoDS(
+    #         collection=COLLECTION,
+    #         query={"grades": []},
+    #         host=HOST,
+    #         port=PORT,
+    #         user=USER,
+    #         password=PASSWORD,
+    #         database=DATABASE,
+    #         limit=5,
+    #     )
+    #     assert len(atlas_ds.df) == 5
 
-        df, _ = atlas_ds.query({"grades":{"$size": 5}})
-        assert len(df) == 5
-        df, _ = atlas_ds.query({"grades":{"$size": 45}})
-        assert len(df) == 0
+    #     df, _ = atlas_ds.query({"grades":{"$size": 5}})
+    #     assert len(df) == 5
+    #     df, _ = atlas_ds.query({"grades":{"$size": 45}})
+    #     assert len(df) == 0
