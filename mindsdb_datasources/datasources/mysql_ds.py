@@ -21,13 +21,11 @@ class MySqlDS(SQLDataSource):
         self.port = int(port)
         self.user = user
         self.password = password
+        self._temp_dir = None
         self.ssl = ssl
-
         self.ssl_ca = self._get_cert_file_path(ssl_ca_name, ssl_ca)
         self.ssl_cert = self._get_cert_file_path(ssl_cert_name, ssl_cert)
         self.ssl_key = self._get_cert_file_path(ssl_key_name, ssl_key)
-
-        self._temp_dir = None
 
     def __del__(self):
         if self._temp_dir is None:
