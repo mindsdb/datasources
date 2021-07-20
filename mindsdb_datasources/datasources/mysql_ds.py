@@ -36,7 +36,7 @@ class MySqlDS(SQLDataSource):
     def _get_cert_file_path(self, name: str, cert: str) -> str:
         if isinstance(cert, str) and os.path.isfile(cert) is False:
             if self._temp_dir is None:
-                self._temp_dir = tempfile.gettempdir()
+                self._temp_dir = tempfile.mkdtemp(prefix='mindsdb_mysql_cert_')
             file_path = os.path.join(self._temp_dir, name)
             with open(file_path, 'wt') as f:
                 f.write(cert)
