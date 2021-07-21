@@ -28,7 +28,7 @@ class MySqlDS(SQLDataSource):
         self.ssl_key = self._get_cert_file_path(ssl_key_name, ssl_key)
 
     def __del__(self):
-        if self._temp_dir is None:
+        if self._temp_dir is not None:
             shutil.rmtree(self._temp_dir)
 
     def _get_cert_file_path(self, name: str, cert: str) -> str:
