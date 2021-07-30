@@ -16,7 +16,7 @@ class ScyllaDS(SQLDataSource):
         super().__init__(query)
         self.keyspace = database
         self.host = host
-        self.port = int(port)
+        self.port = port
         self.user = user
         self.password = password
         self.secure_connect_bundle = secure_connect_bundle
@@ -41,7 +41,7 @@ class ScyllaDS(SQLDataSource):
             }
         else:
             connection_props['contact_points'] = [self.host]
-            connection_props['port'] = self.port
+            connection_props['port'] = int(self.port)
 
         cluster = Cluster(**connection_props)
         session = cluster.connect()
