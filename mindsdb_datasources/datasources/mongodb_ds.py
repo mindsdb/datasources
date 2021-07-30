@@ -35,9 +35,7 @@ class MongoDS(DataSource):
         self.user = user
         self.password = password
 
-    def query(self, q):
-        assert isinstance(q, dict)
-
+    def _get_connection(self):
         kwargs = {}
 
         if isinstance(self.user, str) and len(self.user) > 0:
@@ -57,12 +55,16 @@ class MongoDS(DataSource):
             if kwargs.get('tls', None) is None:
                 kwargs['tls'] = True
 
-        conn = MongoClient(
+        return MongoClient(
             host=self.host,
             port=self.port,
             **kwargs
         )
 
+    def query(self, q):
+        assert isinstance(q, dict)
+
+        conn = self._get_connection()
         db = conn[self.database]
         coll = db[self.collection]
 
@@ -81,3 +83,41 @@ class MongoDS(DataSource):
 
     def name(self):
         return 'MongoDB - {}'.format(self._query)
+
+    def get_columns(self):
+        ''' Return collection top level keys
+            Note: 'reduce' is not work at Atlas
+        '''
+        conn = self._get_connection()
+        db = conn[self.database]
+        coll = db[self.collection]
+        result = coll.aggregate(
+            [ {
+                "$match": self._query
+            }, {
+                "$project": {
+                    "arrayofkeyvalue": {
+                        "$objectToArray": "$$ROOT"
+                    }
+                }
+            }, {
+                "$unwind": "$arrayofkeyvalue"
+            }, {
+                "$group": {
+                    "_id":None,
+                    "allkeys": {
+                        "$addToSet": "$arrayofkeyvalue.k"
+                    }
+                }
+            } ]
+        )
+        result = list(result)[0]['allkeys']
+        result.remove('_id')
+        return result
+
+    def get_row_count(self):
+        conn = self._get_connection()
+        db = conn[self.database]
+        coll = db[self.collection]
+        row_count = coll.find(self._query).count()
+        return row_count
