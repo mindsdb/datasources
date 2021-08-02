@@ -4,11 +4,15 @@ import csv
 import codecs
 import json
 import traceback
+import shutil
+from urllib.parse import urlparse
+import tempfile
 
 import pandas as pd
 import requests
 
 from mindsdb_datasources.datasources.data_source import DataSource
+
 
 def clean_row(row):
     n_row = []
@@ -19,6 +23,9 @@ def clean_row(row):
             n_row.append(cell)
 
     return n_row
+
+
+accepted_csv_delimiters = [',', '\t', ';']
 
 
 class FileDS(DataSource):
@@ -37,6 +44,20 @@ class FileDS(DataSource):
         self.custom_parser = custom_parser
         self.dialect = None
 
+        self._column_names = None
+        self._row_count = None
+
+        self._temp_dir = None
+
+        try:
+            self.is_url = urlparse(file).scheme in ('http', 'https')
+        except Exception:
+            self.is_url = False
+
+    def __del__(self):
+        if self._temp_dir is not None:
+            shutil.rmtree(self._temp_dir)
+
     def _handle_source(self):
         self._file_name = os.path.basename(self.file)
 
@@ -50,7 +71,7 @@ class FileDS(DataSource):
         elif fmt == 'csv':
             csv_reader = list(csv.reader(data, self.dialect))
             header = csv_reader[0]
-            file_data =  csv_reader[1:]
+            file_data = csv_reader[1:]
 
         elif fmt in ['xlsx', 'xls']:
             data.seek(0)
@@ -97,33 +118,17 @@ class FileDS(DataSource):
         # get file as io object
         ############
 
+        file_path = self._get_file_path()
+
         data = BytesIO()
 
-        # get data from either url or file load in memory
-        if file.startswith('http:') or file.startswith('https:'):
-            print('Getting file')
-            try:
-                print(file)
-                r = requests.get(file, stream=True)
-            except Exception as e:
-                print(e)
-            print('Got file')
-            if r.status_code == 200:
-                for chunk in r:
-                    data.write(chunk)
-            data.seek(0)
-            print('Read data')
-
-        # else read file from local file system
-        else:
-            try:
-                with open(file, 'rb') as fp:
-                    data = BytesIO(fp.read())
-            except Exception as e:
-                error = 'Could not load file, possible exception : {exception}'.format(exception = e)
-                print(error)
-                raise ValueError(error)
-
+        try:
+            with open(file_path, 'rb') as fp:
+                data = BytesIO(fp.read())
+        except Exception as e:
+            error = 'Could not load file, possible exception : {exception}'.format(exception=e)
+            print(error)
+            raise ValueError(error)
 
         dialect = None
 
@@ -133,11 +138,11 @@ class FileDS(DataSource):
 
         # try to guess if its an excel file
         xlsx_sig = b'\x50\x4B\x05\06'
-        xlsx_sig2 = b'\x50\x4B\x03\x04'
+        # xlsx_sig2 = b'\x50\x4B\x03\x04'
         xls_sig = b'\x09\x08\x10\x00\x00\x06\x05\x00'
 
         # different whence, offset, size for different types
-        excel_meta = [ ('xls', 0, 512, 8), ('xlsx', 2, -22, 4)]
+        excel_meta = [('xls', 0, 512, 8), ('xlsx', 2, -22, 4)]
 
         for filename, whence, offset, size in excel_meta:
 
@@ -189,24 +194,7 @@ class FileDS(DataSource):
 
         # lets try to figure out if its a csv
         try:
-            data.seek(0)
-            first_few_lines = []
-            i = 0
-
-            # need to have sample to deduce a dialect
-            # but it is not a good idea to deduce dialect by header row
-            # data[0]
-            for i, line in enumerate(data):
-                first_few_lines.append(line)
-                if i > 10:
-                    break
-
-            accepted_delimiters = [',','\t', ';']
-
-            #provide sample from data if it is possible
-            dialect = csv.Sniffer().sniff(''.join(first_few_lines), delimiters=accepted_delimiters)
-            data.seek(0)
-            # if csv dialect identified then return csv
+            dialect = self._get_csv_dialect()
             if dialect:
                 return data, 'csv', dialect
             return data, None, dialect
@@ -219,3 +207,64 @@ class FileDS(DataSource):
 
     def name(self):
         return 'File, {}'.format(os.path.basename(self.file))
+
+    def _fetch_url(self):
+        if self._temp_dir is not None and os.path.isfile(os.path.join(self._temp_dir, 'file')):
+            return
+        self._temp_dir = tempfile.mkdtemp(prefix='mindsdb_fileds_')
+        try:
+            r = requests.get(self.file, stream=True)
+            if r.status_code == 200:
+                with open(os.path.join(self._temp_dir, 'file'), 'wb') as f:
+                    for chunk in r:
+                        f.write(chunk)
+            else:
+                raise Exception(f'Responce status code is {r.status_code}')
+        except Exception as e:
+            print(f'Error during getting {self.file}')
+            print(e)
+            raise
+
+    def _get_csv_dialect(self) -> object:
+        file_path = self._get_file_path()
+        with open(file_path, 'rt') as f:
+            try:
+                dialect = csv.Sniffer().sniff(f.read(128 * 1024), delimiters=accepted_csv_delimiters)
+            except csv.Error:
+                dialect = None
+        return dialect
+
+    def _read_meta(self):
+        ''' determine 'column_names' and 'row_count' for DS
+
+            TODO: at this moment optimisation exists only for .csv files,
+            all other files will be read whole, which is slow
+        '''
+        dialect = self._get_csv_dialect()
+        if dialect is not None:
+            file_path = self._get_file_path()
+            with open(file_path) as csvfile:
+                csv_reader = csv.reader(csvfile, delimiter=dialect.delimiter)
+                self._column_names = next(csv_reader, None)
+                self._row_count = sum(1 for line in csv_reader)
+        else:
+            df = self.df
+            self._column_names = list(df.keys())
+            self._row_count = len(df)
+
+    def _get_file_path(self) -> str:
+        path = self.file
+        if self.is_url:
+            self._fetch_url()
+            path = os.path.join(self._temp_dir, 'file')
+        return path
+
+    def get_columns(self) -> list:
+        if self._column_names is None:
+            self._read_meta()
+        return self._column_names
+
+    def get_row_count(self) -> int:
+        if self._row_count is None:
+            self._read_meta()
+        return self._row_count
