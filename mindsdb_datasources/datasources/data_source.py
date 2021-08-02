@@ -277,3 +277,14 @@ class SQLDataSource(DataSource):
 
     def name(self):
         raise NotImplementedError
+
+    def get_columns(self):
+        original_query = self._query.strip(' ;\t\n')
+        _result, columns = self.query(f"select * from ({original_query}) as a limit 1")
+        columns = list(columns.keys())
+        return columns
+
+    def get_row_count(self):
+        original_query = self._query.strip(' ;\t\n')
+        result, _columns = self.query(f"select count(1) as count from ({original_query}) as a")
+        return result['count'][0]
