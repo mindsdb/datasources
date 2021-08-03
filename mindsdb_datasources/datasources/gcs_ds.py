@@ -13,15 +13,17 @@ class GCSDS(DataSource):
         super().__init__()
         self.bucket_name = bucket_name
         self.file_path = file_path
+        self.auth_json = auth_json
+        self.project_id = project_id
 
     def query(self, q=None):
         try:
-            auth_info = json.loads(auth_json)
+            auth_info = json.loads(self.auth_json)
             credentials = service_account.Credentials.from_service_account_info(info=auth_info)
         except Exception:
-            credentials = service_account.Credentials.from_service_account_file(filename=auth_json)
+            credentials = service_account.Credentials.from_service_account_file(filename=self.auth_json)
 
-        gc_client = storage.Client(credentials=credentials, project=project_id)
+        gc_client = storage.Client(credentials=credentials, project=self.project_id)
         bucket = gc_client.get_bucket(self.bucket_name)
         blob = storage.Blob(self.file_path, bucket)
 

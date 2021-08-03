@@ -267,4 +267,4 @@ class FileDS(DataSource):
     def get_row_count(self) -> int:
         if self._row_count is None:
             self._read_meta()
-        return self._row_count
+        return int(self._row_count)

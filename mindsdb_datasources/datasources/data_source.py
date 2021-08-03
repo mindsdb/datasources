@@ -287,4 +287,4 @@ class SQLDataSource(DataSource):
     def get_row_count(self):
         original_query = self._query.strip(' ;\t\n')
         result, _columns = self.query(f"select count(1) as count from ({original_query}) as a")
-        return result['count'][0]
+        return int(result['count'][0])
