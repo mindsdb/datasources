@@ -31,7 +31,7 @@ class MongoDS(DataSource):
         self.limit = limit
         self.sort_by = sort_by
         self.host = host
-        self.port = port
+        self.port = int(port or 27017)
         self.user = user
         self.password = password
 
