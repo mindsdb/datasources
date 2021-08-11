@@ -36,7 +36,9 @@ class MongoDS(DataSource):
         self.password = password
 
     def _get_connection(self):
-        kwargs = {}
+        kwargs = {
+            'appname': 'MindsDB'
+        }
 
         if isinstance(self.user, str) and len(self.user) > 0:
             kwargs['username'] = self.user
