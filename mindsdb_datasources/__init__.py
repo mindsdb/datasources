@@ -4,6 +4,8 @@ from mindsdb_datasources.datasources.mysql_ds import MySqlDS
 from mindsdb_datasources.datasources.clickhouse_ds import ClickhouseDS
 from mindsdb_datasources.datasources.file_ds import FileDS
 from mindsdb_datasources.datasources.sqlite3_ds import SQLite3DS
+from mindsdb_datasources.datasources.snowflake_ds import SnowflakeDS
+
 
 from mindsdb_datasources.__about__ import __package_name__ as name, __version__
 
@@ -37,12 +39,6 @@ try:
 except ImportError:
     print("Athena Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     AthenaDS = None
-
-try:
-    from mindsdb_datasources.datasources.snowflake_ds import SnowflakeDS
-except ImportError:
-    print("SnowflakeDS Datasource is not available by default. If you wish to use it, please install mindsdb_native[snowflake]")
-    SnowflakeDS = None
 
 try:
     from mindsdb_datasources.datasources.redshift_ds import RedshiftDS

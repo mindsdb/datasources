@@ -30,7 +30,6 @@ jobs:
     - name: Install dependencies Linux
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
-          pip install -r optional_requirements_snowflake.txt;
           pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
@@ -40,7 +39,6 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           pip install torch==1.7.0+cpu torchvision==0.8.1+cpu -f https://download.pytorch.org/whl/torch_stable.html;
-          pip install -r optional_requirements_snowflake.txt;
           pip install -r optional_requirements_cassandra.txt;
         fi
       shell: bash
@@ -49,7 +47,6 @@ jobs:
     - name: Install dependencies OSX
       run: |
         if [ "$RUNNER_OS" == "macOS" ]; then
-          pip install -r optional_requirements_snowflake.txt;
           pip install -r optional_requirements_cassandra.txt;
           brew install libomp;
         fi

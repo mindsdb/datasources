@@ -1,16 +1,11 @@
 import os
 import unittest
-import mindsdb_native
-from common import DB_CREDENTIALS, break_dataset
+from common import DB_CREDENTIALS
 
 
 class TestSnowflake(unittest.TestCase):
-    @unittest.skip('Snowflake too buggy')
     def test_snowflake_ds(self):
-        if os.name == 'nt':
-            print('Snowflake datasource (SnowflakeDS) can\'t be used on windows at the moment due to the connector not working')
-            return
-
+        print('RUNNING!')
         from mindsdb_datasources import SnowflakeDS
 
         # Create the datasource
@@ -27,12 +22,5 @@ class TestSnowflake(unittest.TestCase):
             port=DB_CREDENTIALS['snowflake']['port'],
         )
 
-        snowflake_ds.df = break_dataset(snowflake_ds.df)
-
-        # Make sure we can use it for some basic tasks
-        data_analysis = mindsdb_native.F.analyse_dataset(
-            snowflake_ds,
-            sample_settings={'sample_percentage': 5}
-        )
-
-        assert len(data_analysis['columns']) == 7
+        assert len(len(snowflake_ds.df)) == 1338
+        assert len(snowflake_ds.df.columns) == 7
