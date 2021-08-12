@@ -1,5 +1,6 @@
 from mindsdb_datasources.datasources.data_source import SQLDataSource
 import pandas as pd
+import pyodbc
 
 
 class SnowflakeDS(SQLDataSource):
@@ -17,27 +18,15 @@ class SnowflakeDS(SQLDataSource):
         self.port = int(port)
 
     def query(self, q):
-        # Note: This import will *break* the requests package in certain cases, guarding against it so that we only touch this odious libray when absolutely necessary (more info here: https://github.com/boto/boto3/issues/2577)
-        from snowflake.connector import DictCursor
-        from snowflake import connector
-          
-        con = connector.connect(
-            host=self.host,
-            user=self.user,
-            password=self.password,
-            account=self.account,
-            warehouse=self.warehouse,
-            database=self.database,
-            schema=self.schema,
-            protocol=self.protocol,
-            port=self.port
-        )
-        # Create a cursor object.
-        cur = con.cursor(DictCursor)
-        cur.execute(q)
-        #df = cur.fetch_pandas_all()
-        data = [x for x in cur.fetchall()]
-        df = pd.DataFrame(data)
+        print(self.host)
+        con = pyodbc.connect(f"Driver={{SnowflakeDSIIDriver}}; Server={self.host}; Database={self.database}; schema={self.schema}; UID={self.user}; PWD={self.password}; warehouse={self.warehouse}; protocol={self.protocol}; port={self.port}; account={self.account}")
+
+        cur = con.cursor().execute(q)
+        columns = [column[0] for column in cur.description]
+        results = []
+        for row in cur.fetchall():
+            results.append(dict(zip(columns, row)))
+        df = pd.DataFrame(results)
         cur.close()
         con.close()
 
