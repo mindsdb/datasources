@@ -26,11 +26,6 @@ with open('requirements.txt', 'r') as req_file:
 with open('requirements_test.txt', 'r') as req_file:
     test_requirements = [req.strip() for req in req_file.read().splitlines()]
 
-snowflake_requirements = []
-with open('optional_requirements_snowflake.txt', 'r') as fp:
-    for line in fp:
-        snowflake_requirements.append(line.rstrip('\n'))
-
 scylla_requirements = []
 with open('optional_requirements_scylla.txt', 'r') as fp:
     for line in fp:
@@ -63,7 +58,6 @@ setuptools.setup(
     install_requires=requirements,
     extras_require = {
         'extra_data_sources': extra_data_sources_requirements,
-        'snowflake': snowflake_requirements,
         'scylla': scylla_requirements,
         'cassandra': cassandra_requirements
     },
