@@ -15,6 +15,7 @@ except:
     print("SnowflakeDS is not available by default. Please install snowflake's ODBC driver and pyodbc to use it!")
     SnowflakeDS = None
 
+
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
 except:
