@@ -22,5 +22,5 @@ class TestSnowflake(unittest.TestCase):
             port=DB_CREDENTIALS['snowflake']['port'],
         )
 
-        assert len(len(snowflake_ds.df)) == 1338
+        assert len(snowflake_ds.df) == 1338
         assert len(snowflake_ds.df.columns) == 7
