@@ -28,7 +28,7 @@ jobs:
         # Pyodbc stuff for snowflake
         sudo apt-get install unixodbc unixodbc-dev
         pip install pyodbc
-        wget https://sfc-repo.snowflakecomputing.com/odbc/linux/2.23.3/snowflake-odbc-2.23.3.x86_64.deb && sudo dpkg -i snowflake-odbc-2.23.3.x86_64.deb
+        wget https://sfc-repo.snowflakec=]omputing.com/odbc/linux/2.23.3/snowflake-odbc-2.23.3.x86_64.deb && yes | sudo dpkg -i snowflake-odbc-2.23.3.x86_64.deb
       env:
         CHECK_FOR_UPDATES: False
     - name: Install dependencies Linux
