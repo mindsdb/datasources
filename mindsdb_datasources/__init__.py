@@ -4,12 +4,17 @@ from mindsdb_datasources.datasources.mysql_ds import MySqlDS
 from mindsdb_datasources.datasources.clickhouse_ds import ClickhouseDS
 from mindsdb_datasources.datasources.file_ds import FileDS
 from mindsdb_datasources.datasources.sqlite3_ds import SQLite3DS
-from mindsdb_datasources.datasources.snowflake_ds import SnowflakeDS
 
 
 from mindsdb_datasources.__about__ import __package_name__ as name, __version__
 
 # These might not initialized properly since they require optional dependencies, so we wrap them in a try-except
+try:
+    from mindsdb_datasources.datasources.snowflake_ds import SnowflakeDS
+except:
+    print("SnowflakeDS is not available by default. Please install snowflake's ODBC driver and pyodbc to use it!")
+    SnowflakeDS = None
+
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
 except:

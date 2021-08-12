@@ -25,6 +25,10 @@ jobs:
         pip install -r optional_requirements_extra_data_sources.txt
         pip install mindsdb_native
         pip install --no-cache-dir -e .
+        # Pyodbc stuff for snowflake
+        sudo apt-get install unixodbc unixodbc-dev
+        pip install pyodbc
+        wget https://sfc-repo.snowflakecomputing.com/odbc/linux/2.23.3/snowflake-odbc-2.23.3.x86_64.deb && sudo dpkg -i snowflake-odbc-2.23.3.x86_64.deb
       env:
         CHECK_FOR_UPDATES: False
     - name: Install dependencies Linux
