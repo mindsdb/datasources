@@ -1,4 +1,3 @@
-import os
 from mindsdb_datasources.datasources.data_source import PostgresDS
 
 
@@ -8,5 +7,4 @@ class TimescaleDS(PostgresDS):
         super.__init__(query, database, host, port, user, password)
 
     def name(self):
-        return 'Timescale - {}'.format(self._query) 
-
+        return 'Timescale - {}'.format(self._query)
