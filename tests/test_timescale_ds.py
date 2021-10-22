@@ -3,7 +3,7 @@ from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
-class TestPostgres(unittest.TestCase):
+class TestTimeScale(unittest.TestCase):
     def setUp(self):
         self.USER = DB_CREDENTIALS['postgres']['user']
         self.PASSWORD = DB_CREDENTIALS['postgres']['password']
@@ -30,7 +30,7 @@ class TestPostgres(unittest.TestCase):
             )
         )
 
-        timescale.df = break_dataset(postgres_ds.df)
+        timescale.df = break_dataset(timescale_ds.df)
 
         assert len(postgres_ds) == LIMIT
 
