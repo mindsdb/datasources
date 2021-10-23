@@ -1,14 +1,9 @@
 import unittest
 from mindsdb_native import F
-from common import DB_CREDENTIALS, break_dataset
+from common import break_dataset
 
 
 class TestBigQuery(unittest.TestCase):
-    def setUp(self):
-        self.PROJECT = DB_CREDENTIALS['bigquery']['project']
-        self.CREDENTIALS = DB_CREDENTIALS['bigquery']['credentials']
-
-
     def test_bigquery_ds(self):
         from mindsdb_datasources import BigQueryDS
 
