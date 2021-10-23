@@ -18,8 +18,6 @@ class TestBigQuery(unittest.TestCase):
         """.format(LIMIT)
 
         bigquery_ds = BigQueryDS(
-            project=self.PROJECT,
-            credentials=self.CREDENTIALS,
             query=query
         )
 
