@@ -30,5 +30,5 @@ class BigQueryDS(SQLDataSource):
         return df, self._make_colmap(df)
 
     def name(self):
-        return 'BigQuery - {}'.format(self._query)
+        return 'Google BigQuery - {}'.format(self._query)
 
