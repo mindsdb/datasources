@@ -10,7 +10,7 @@ class TestSnowflake(unittest.TestCase):
 
         LIMIT = 100
         # Create the datasource
-        dreamio_ds = DremioDS(
+        dremio_ds = DremioDS(
             query=f'SELECT * FROM foo.bar LIMIT {LIMIT}',
             host=DB_CREDENTIALS['dremio']['host'],
             user=DB_CREDENTIALS['dremio']['port'],
@@ -18,5 +18,5 @@ class TestSnowflake(unittest.TestCase):
             account=DB_CREDENTIALS['dremio']['password'],
         )
 
-        assert len(dreamio_ds.df) == LIMIT
+        assert len(dremio_ds.df) == LIMIT
 
