@@ -69,3 +69,9 @@ try:
 except ImportError:
     print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
+
+try:
+    from mindsdb_datasources.datasources.presto_ds import PrestoDS
+except:
+    print("PrestoDS is not available by default. Please install snowflake's ODBC driver and pyodbc to use it!")
+    PrestoDS = None
