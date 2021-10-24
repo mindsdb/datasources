@@ -11,3 +11,4 @@ moz_sql_parser >= 3.0.0, < 4.1.20329
 pg8000 >= 1.15.3
 pymongo[tls, srv] >= 3.10.1
 certifi
+JayDeBeApi >= 1.2.3
