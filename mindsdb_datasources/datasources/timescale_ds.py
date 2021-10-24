@@ -1,4 +1,4 @@
-from mindsdb_datasources.datasources.data_source import SQLDataSource
+from mindsdb_datasources.datasources.data_source import PostgresDS
 
 class TimeScaleDS(PostgresDS):
     def __init__(self,query, database, host,

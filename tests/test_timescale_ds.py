@@ -30,8 +30,8 @@ class TestTimeScale(unittest.TestCase):
             )
         )
 
-        timescale.df = break_dataset(timescale_ds.df)
+        timescale_ds.df = break_dataset(timescale_ds.df)
 
-        assert len(postgres_ds) == LIMIT
+        assert len(timescale_ds) == LIMIT
 
         F.analyse_dataset(timescale_ds)
