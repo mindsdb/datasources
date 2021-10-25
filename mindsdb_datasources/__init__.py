@@ -69,3 +69,8 @@ try:
 except ImportError:
     print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
+
+try:
+    from mindsdb_datasources.datasources.dremio_ds import DremioDS
+except ImportError:
+    print("Dremio Datasource is not available by default. If you wish to use it, please install the Dremio ODBC Driver and pyodbc.")
