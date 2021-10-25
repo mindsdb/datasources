@@ -77,3 +77,4 @@ except ImportError:
           " If you wish to use it, please install Solr and JayDeBeApi.",
           " Then export the Solr JDBC driver to CLASSPATH.",
           " Details: https://solr.apache.org/guide/6_6/solr-jdbc-python-jython.html#jaydebeapi")
+    SolrDS = None
