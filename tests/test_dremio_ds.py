@@ -3,19 +3,17 @@ import unittest
 from common import DB_CREDENTIALS
 
 
-class TestSnowflake(unittest.TestCase):
-    def test_snowflake_ds(self):
-        print('RUNNING!')
+class TestDremioDS(unittest.TestCase):
+    def test_dremio_ds(self):
         from mindsdb_datasources import DremioDS
 
         LIMIT = 100
-        # Create the datasource
+
         dremio_ds = DremioDS(
             query=f'SELECT * FROM foo.bar LIMIT {LIMIT}',
             host=DB_CREDENTIALS['dremio']['host'],
             user=DB_CREDENTIALS['dremio']['port'],
             password=DB_CREDENTIALS['dremio']['user'],
-            account=DB_CREDENTIALS['dremio']['password'],
         )
 
         assert len(dremio_ds.df) == LIMIT
