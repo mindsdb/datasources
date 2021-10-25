@@ -69,3 +69,11 @@ try:
 except ImportError:
     print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
+
+try:
+    from mindsdb_datasources.datasources.solr_ds import SolrDS
+except ImportError:
+    print("Solr Datasource is not available by default.",
+          " If you wish to use it, please install Solr and JayDeBeApi.",
+          " Then export the Solr JDBC driver to CLASSPATH.",
+          " Details: https://solr.apache.org/guide/6_6/solr-jdbc-python-jython.html#jaydebeapi")
