@@ -79,3 +79,9 @@ try:
     from mindsdb_datasources.datasources.bigquery_ds import BigQueryDS:
     print("BigQuery Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     BigQueryDS = None
+
+try:
+    from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
+except ImportError:
+    print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    TimescaleDS = None
