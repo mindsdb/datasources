@@ -69,9 +69,9 @@ try:
 except ImportError:
     print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
-    
+
 try:
-    from mindsdb_datasources.datasources.timescale_ds import TimeScaleDS
+    from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
-    print("TimeScale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
-    TimeScaleDS = None
+    print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    TimescaleDS = None
