@@ -75,3 +75,9 @@ try:
 except ImportError:
     print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     TimescaleDS = None
+
+try:
+    from mindsdb_datasources.datasources.impala_ds import ImpalaDS
+except ImportError:
+    print("Impala Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    ImpalaDS = None
