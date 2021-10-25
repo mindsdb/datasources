@@ -13,7 +13,7 @@ class TrinoDS(unittest.TestCase):
         self.CATALOG = 'test-catalog'
         self.SCHEMA = 'test-schema'
 
-    def test_postgres_ds(self):
+    def test_trino_ds(self):
         from mindsdb_datasources import TrinoDS
 
         LIMIT = 100
