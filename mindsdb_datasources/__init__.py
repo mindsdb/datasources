@@ -15,7 +15,6 @@ except:
     print("SnowflakeDS is not available by default. Please install snowflake's ODBC driver and pyodbc to use it!")
     SnowflakeDS = None
 
-
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
 except:
@@ -69,6 +68,17 @@ try:
 except ImportError:
     print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_native[cassandra]")
     CassandraDS = None
+
+try:
+    from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
+except ImportError:
+    print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    TimescaleDS = None
+
+try:
+    from mindsdb_datasources.datasources.bigquery_ds import BigQueryDS:
+    print("BigQuery Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    BigQueryDS = None
 
 try:
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
