@@ -1,4 +1,5 @@
 import impala.dbapi
+from impala.util import as_pandas
 import pandas as pd
 
 from mindsdb_datasources.datasources.data_source import SQLDataSource
@@ -29,8 +30,10 @@ class ImpalaDS(SQLDataSource):
             password=self.password,
             database=self.database
         )
+        cur = con.cursor()
+        cur.execute(q)
 
-        df = pd.read_sql(q, con=con)
+        df = as_pandas(cur)
         con.close()
 
         return df, self._make_colmap(df)
