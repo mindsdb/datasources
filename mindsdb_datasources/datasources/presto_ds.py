@@ -19,6 +19,7 @@ class PrestoDS(SQLDataSource):
 
     def query(self, q):
         con = prestodb.dbapi.connect(
+            catalog=self.catalog,
             schema=self.schema,
             user=self.user,
             password=self.password,
@@ -26,9 +27,6 @@ class PrestoDS(SQLDataSource):
             port=self.port,
             http_scheme=self.protocol
         )
-
-        df = pd.read_sql(q, con=con)
-        con.close()
 
         cur = con.cursor().execute(q)
         columns = [column[0] for column in cur.description]
