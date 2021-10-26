@@ -79,5 +79,5 @@ except ImportError:
 try:
     from mindsdb_datasources.datasources.trino_ds import TrinoDS
 except ImportError:
-    print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
     TrinoDS = None
