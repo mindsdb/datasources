@@ -1,6 +1,8 @@
 import pandas as pd
 from pyhive import hive
+
 from mindsdb_datasources.datasources.data_source import SQLDataSource
+
 
 class HiveDS(SQLDataSource):
     def __init__(self, query, host='localhost', port=10000,
@@ -10,7 +12,7 @@ class HiveDS(SQLDataSource):
 
         super().__init__(query=query)
         self.host = host
-        self.port = port
+        self.port = int(port)
         self.database = database
         self.username = username
         self.password = password
@@ -38,7 +40,6 @@ class HiveDS(SQLDataSource):
 
         df = pd.read_sql(q, con=con)
         con.close()
-
 
         return df, self._make_colmap(df)
 
