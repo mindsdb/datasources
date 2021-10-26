@@ -43,4 +43,4 @@ class HiveDS(SQLDataSource):
         return df, self._make_colmap(df)
 
     def name(self):
-        return 'SQLite3 - {}'.format(self._query)
+        return 'Hive - {}'.format(self._query)
