@@ -82,7 +82,7 @@ except ImportError:
     DremioDS = None
 
 try:
-    from mindsdb_datasources.datasources.bigquery_ds import BigQueryDS:
+    from mindsdb_datasources.datasources.bigquery_ds import BigQueryDS
 except ImportError:      
     print("BigQuery Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     BigQueryDS = None
