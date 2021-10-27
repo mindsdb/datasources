@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -29,8 +28,6 @@ class TestMYSQL(unittest.TestCase):
         mysql_ds.df = break_dataset(mysql_ds.df)
 
         assert len(mysql_ds) <= LIMIT
-
-        F.analyse_dataset(mysql_ds)
 
         # Our SQL parsing fails here, test if we're still able to filter via the dataframe fallback
         for val in mysql_ds.filter([['sex', 'like','fem']])['sex']:

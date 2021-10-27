@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import Predictor, F
 from common import DB_CREDENTIALS
 from mindsdb_datasources import MongoDS
 
@@ -24,8 +23,6 @@ class TestMongoDB(unittest.TestCase):
             password=self.PASSWORD,
             database=self.DATABASE
         )
-
-        F.analyse_dataset(from_data=mongodb_ds)
 
         for val in mongodb_ds.filter([['location', 'like','ood']])['location']:
             assert val == 'good'

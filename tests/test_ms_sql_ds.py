@@ -1,7 +1,6 @@
 import os
 import unittest
 import logging
-from mindsdb_native import Predictor, F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -25,4 +24,3 @@ class TestMSSQL(unittest.TestCase):
         )
 
         assert (len(mssql_ds.df) > 200)
-        analysis = F.analyse_dataset(from_data=mssql_ds)
