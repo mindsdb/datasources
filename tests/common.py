@@ -14,6 +14,7 @@ if _var_value is None:
 
 assert _var_value is not None, _var_name + ' ' + 'is not set'
 
+
 DB_CREDENTIALS = json.loads(_var_value)
 
 
