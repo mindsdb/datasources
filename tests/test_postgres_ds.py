@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -34,4 +33,3 @@ class TestPostgres(unittest.TestCase):
 
         assert len(postgres_ds) == LIMIT
 
-        F.analyse_dataset(postgres_ds)
