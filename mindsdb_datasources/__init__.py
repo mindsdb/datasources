@@ -84,6 +84,7 @@ except:
     print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     PrestoDS = None
 
+try:
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
     print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
@@ -106,3 +107,9 @@ try:
 except ImportError:
     print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
     TrinoDS = None
+
+try:
+    from mindsdb_datasources.datasources.influx_ds import InfluxDS
+except ImportError:
+    print("InfluxDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    InfluxDS = None
