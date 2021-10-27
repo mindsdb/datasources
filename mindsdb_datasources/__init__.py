@@ -70,6 +70,21 @@ except ImportError:
     CassandraDS = None
 
 try:
+    from mindsdb_datasources.datasources.solr_ds import SolrDS
+except ImportError:
+    print("Solr Datasource is not available by default.",
+          " If you wish to use it, please install Solr and JayDeBeApi.",
+          " Then export the Solr JDBC driver to CLASSPATH.",
+          " Details: https://solr.apache.org/guide/6_6/solr-jdbc-python-jython.html#jaydebeapi")
+    SolrDS = None
+    
+try:    
+    from mindsdb_datasources.datasources.presto_ds import PrestoDS
+except:
+    print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    PrestoDS = None
+
+try:
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
     print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
@@ -88,7 +103,19 @@ except ImportError:
     BigQueryDS = None
 
 try:
+
     from mindsdb_datasources.datasources.timescale_ds import HiveDS
 except ImportError:
     print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
     HiveDS = None
+
+    from mindsdb_datasources.datasources.trino_ds import TrinoDS
+except ImportError:
+    print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    TrinoDS = None
+
+try:
+    from mindsdb_datasources.datasources.influx_ds import InfluxDS
+except ImportError:
+    print("InfluxDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    InfluxDS = None

@@ -1,8 +1,8 @@
 import os
 import unittest
-from common import DB_CREDENTIALS
+#from common import DB_CREDENTIALS
 
-
+@unittest.skip("Ignore untill we have environment ready")
 class TestDremioDS(unittest.TestCase):
     def test_dremio_ds(self):
         from mindsdb_datasources import DremioDS
