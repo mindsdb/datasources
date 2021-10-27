@@ -70,12 +70,20 @@ except ImportError:
     CassandraDS = None
 
 try:
+    from mindsdb_datasources.datasources.solr_ds import SolrDS
+except ImportError:
+    print("Solr Datasource is not available by default.",
+          " If you wish to use it, please install Solr and JayDeBeApi.",
+          " Then export the Solr JDBC driver to CLASSPATH.",
+          " Details: https://solr.apache.org/guide/6_6/solr-jdbc-python-jython.html#jaydebeapi")
+    SolrDS = None
+    
+try:    
     from mindsdb_datasources.datasources.presto_ds import PrestoDS
 except:
     print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     PrestoDS = None
 
-try:
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
     print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
