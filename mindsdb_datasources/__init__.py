@@ -79,6 +79,11 @@ except ImportError:
     SolrDS = None
     
 try:    
+    from mindsdb_datasources.datasources.presto_ds import PrestoDS
+except:
+    print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    PrestoDS = None
+
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
     print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
