@@ -103,6 +103,12 @@ except ImportError:
     BigQueryDS = None
 
 try:
+
+    from mindsdb_datasources.datasources.timescale_ds import HiveDS
+except ImportError:
+    print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    HiveDS = None
+
     from mindsdb_datasources.datasources.trino_ds import TrinoDS
 except ImportError:
     print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
