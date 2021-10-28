@@ -5,3 +5,4 @@ google-auth
 pymssql >= 2.1.4
 google-cloud-bigquery >= 2.28.1
 trino >= 0.306.0
+phoenixdb >= 1.1.0
