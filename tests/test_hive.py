@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -28,5 +27,3 @@ class TestHive(unittest.TestCase):
         hive_ds.df = break_dataset(hive_ds.df)
 
         assert len(hive_ds) == LIMIT
-
-        F.analyse_dataset(hive_ds)
