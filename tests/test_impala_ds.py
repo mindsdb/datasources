@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -28,5 +27,3 @@ class TestImpala(unittest.TestCase):
         impala_ds.df = break_dataset(impala_ds.df)
 
         assert len(impala_ds) == LIMIT
-
-        F.analyse_dataset(impala_ds)
