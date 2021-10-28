@@ -11,13 +11,13 @@ from mindsdb_datasources.__about__ import __package_name__ as name, __version__
 # These might not initialized properly since they require optional dependencies, so we wrap them in a try-except
 try:
     from mindsdb_datasources.datasources.snowflake_ds import SnowflakeDS
-except:
+except ImportError:
     print("SnowflakeDS is not available by default. Please install snowflake's ODBC driver and pyodbc to use it!")
     SnowflakeDS = None
 
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
-except:
+except ImportError:
     print("S3 Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     S3DS = None
 
@@ -103,6 +103,12 @@ except ImportError:
     BigQueryDS = None
 
 try:
+
+    from mindsdb_datasources.datasources.timescale_ds import HiveDS
+except ImportError:
+    print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    HiveDS = None
+
     from mindsdb_datasources.datasources.trino_ds import TrinoDS
 except ImportError:
     print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
