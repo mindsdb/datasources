@@ -113,3 +113,9 @@ try:
 except ImportError:
     print("InfluxDB Datasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
     InfluxDS = None
+
+try:
+    from mindsdb_datasources.datasources.phoenix_ds import PhoenixDS
+except ImportError:
+    print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb[extra_datasources]")
+    PhoenixDS = None
