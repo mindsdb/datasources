@@ -129,3 +129,9 @@ try:
 except ImportError:
     print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb[extra_datasources]")
     PhoenixDS = None
+
+try:
+    from mindsdb_datasources.datasources.quest_ds import QuestDS
+except ImportError:
+    print("QuestDB Datasource is not available by default. If you wish to use it, please install mindsdb[extra_datasources]")
+    QuestDS = None
