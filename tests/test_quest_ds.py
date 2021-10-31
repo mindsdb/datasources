@@ -32,4 +32,3 @@ class TestQuestDB(unittest.TestCase):
         quest_ds.df = break_dataset(quest_ds.df)
 
         assert len(quest_ds) == LIMIT
-
