@@ -108,7 +108,7 @@ except ImportError:
     print("Impala Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
     ImpalaDS = None
 
-    from mindsdb_datasources.datasources.timescale_ds import HiveDS
+    from mindsdb_datasources.datasources.hive_ds import HiveDS
 except ImportError:
     print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
     HiveDS = None
