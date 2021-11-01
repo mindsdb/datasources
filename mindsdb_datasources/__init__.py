@@ -127,11 +127,11 @@ except ImportError:
 try:
     from mindsdb_datasources.datasources.phoenix_ds import PhoenixDS
 except ImportError:
-    print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_datasources]")
+    print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     PhoenixDS = None
 
 try:
     from mindsdb_datasources.datasources.quest_ds import QuestDS
 except ImportError:
-    print("QuestDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_datasources]")
+    print("QuestDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     QuestDS = None
