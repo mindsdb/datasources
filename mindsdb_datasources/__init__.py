@@ -18,55 +18,55 @@ except ImportError:
 try:
     from mindsdb_datasources.datasources.s3_ds import S3DS
 except:
-    print("S3 Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("S3 Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     S3DS = None
 
 try:
     from mindsdb_datasources.datasources.postgres_ds import PostgresDS
 except ImportError:
-    print("Postgres Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Postgres Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     PostgresDS = None
 
 try:
     from mindsdb_datasources.datasources.ms_sql_ds import MSSQLDS
 except ImportError:
-    print("Microsoft SQL Server Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Microsoft SQL Server Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     MSSQLDS = None
 
 try:
     from mindsdb_datasources.datasources.mongodb_ds import MongoDS
 except ImportError:
-    print("Mongo Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Mongo Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     MongoDS = None
 
 try:
     from mindsdb_datasources.datasources.aws_athena_ds import AthenaDS
 except ImportError:
-    print("Athena Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Athena Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     AthenaDS = None
 
 try:
     from mindsdb_datasources.datasources.redshift_ds import RedshiftDS
 except ImportError:
-    print("Redshift Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Redshift Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     RedshiftDS = None
 
 try:
     from mindsdb_datasources.datasources.gcs_ds import GCSDS
 except ImportError:
-    print("Google Cloud Storage Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Google Cloud Storage Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     GCSDS = None
 
 try:
     from mindsdb_datasources.datasources.scylla_ds import ScyllaDS
 except ImportError:
-    print("ScyllaDB Datasource is not available by default. If you wish to use it, please install mindsdb[scylla]")
+    print("ScyllaDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[scylla]")
     ScyllaDS = None
 
 try:
     from mindsdb_datasources.datasources.cassandra_ds import CassandraDS
 except ImportError:
-    print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb[cassandra]")
+    print("Cassandra Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[cassandra]")
     CassandraDS = None
 
 try:
@@ -81,13 +81,13 @@ except ImportError:
 try:    
     from mindsdb_datasources.datasources.presto_ds import PrestoDS
 except:
-    print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_native[extra_data_sources]")
+    print("Presto Darasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     PrestoDS = None
 
 try:
     from mindsdb_datasources.datasources.timescale_ds import TimescaleDS
 except ImportError:
-    print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Timescale Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     TimescaleDS = None
 
 try:
@@ -99,29 +99,29 @@ except ImportError:
 try:
     from mindsdb_datasources.datasources.bigquery_ds import BigQueryDS
 except ImportError:      
-    print("BigQuery Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("BigQuery Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     BigQueryDS = None
 
 try:
 
     from mindsdb_datasources.datasources.timescale_ds import HiveDS
 except ImportError:
-    print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Hive Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     HiveDS = None
 
     from mindsdb_datasources.datasources.trino_ds import TrinoDS
 except ImportError:
-    print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("Trino Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     TrinoDS = None
 
 try:
     from mindsdb_datasources.datasources.influx_ds import InfluxDS
 except ImportError:
-    print("InfluxDB Datasource is not available by default. If you wish to use it, please install mindsdb[extra_data_sources]")
+    print("InfluxDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     InfluxDS = None
 
 try:
     from mindsdb_datasources.datasources.phoenix_ds import PhoenixDS
 except ImportError:
-    print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb[extra_datasources]")
+    print("Phoenix Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_datasources]")
     PhoenixDS = None
