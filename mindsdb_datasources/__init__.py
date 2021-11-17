@@ -4,6 +4,7 @@ from mindsdb_datasources.datasources.mysql_ds import MySqlDS
 from mindsdb_datasources.datasources.clickhouse_ds import ClickhouseDS
 from mindsdb_datasources.datasources.file_ds import FileDS
 from mindsdb_datasources.datasources.sqlite3_ds import SQLite3DS
+from mindsdb_datasources.datasources.crate_ds import CrateDS
 
 
 from mindsdb_datasources.__about__ import __package_name__ as name, __version__
@@ -137,3 +138,9 @@ try:
 except ImportError:
     print("QuestDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
     QuestDS = None
+
+try:
+    from mindsdb_datasources.datasources.crate_ds import CrateDS
+except ImportError:
+    print("CrateDB Datasource is not available by default. If you wish to use it, please install mindsdb_datasources[extra_data_sources]")
+    CrateDS = None
