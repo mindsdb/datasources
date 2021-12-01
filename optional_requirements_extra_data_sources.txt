@@ -9,3 +9,5 @@ trino >= 0.306.0
 impyla >= 0.17.0
 phoenixdb >= 1.1.0
 pyhive[hive] >= 0.6.4
+influxdb
+cx_Oracle
