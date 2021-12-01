@@ -12,5 +12,3 @@ pg8000 >= 1.15.3
 pymongo[tls, srv] >= 3.10.1
 presto-python-client >= 0.8.2
 certifi
-influxdb
-cx_Oracle
