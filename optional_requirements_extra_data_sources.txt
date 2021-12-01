@@ -11,3 +11,4 @@ phoenixdb >= 1.1.0
 pyhive[hive] >= 0.6.4
 influxdb
 cx_Oracle
+presto-python-client >= 0.8.2
