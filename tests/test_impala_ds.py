@@ -1,7 +1,7 @@
 import unittest
 from common import DB_CREDENTIALS, break_dataset
 
-
+@unittest.skip("Ignore untill we have environment ready")
 class TestImpala(unittest.TestCase):
     def setUp(self):
         self.HOST = DB_CREDENTIALS['impala']['host']
