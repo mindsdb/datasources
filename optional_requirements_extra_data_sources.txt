@@ -1,7 +1,7 @@
 boto3 >= 1.9.0
 crate >= 0.26.0
 PyAthena >= 2.0.0
-google-cloud-storage
+google-cloud-storage >= 1.35.1
 google-auth
 pymssql >= 2.1.4
 google-cloud-bigquery >= 2.28.1
