@@ -1,8 +1,8 @@
 import unittest
-from common import DB_CREDENTIALS, break_dataset
+#from common import DB_CREDENTIALS, break_dataset
 
-
-class TestPostgres(unittest.TestCase):
+@unittest.skip("Ignore untill we have environment ready")
+class TestTimescale(unittest.TestCase):
     def setUp(self):
         self.USER = DB_CREDENTIALS['postgres']['user']
         self.PASSWORD = DB_CREDENTIALS['postgres']['password']
@@ -11,12 +11,12 @@ class TestPostgres(unittest.TestCase):
         self.DATABASE = 'postgres'
         self.TABLE = 'home_rentals'
 
-    def test_postgres_ds(self):
-        from mindsdb_datasources import PostgresDS
+    def test_timescale_ds(self):
+        from mindsdb_datasources import TimescaleDS
 
         LIMIT = 100
 
-        postgres_ds = PostgresDS(
+        timescale_ds = TimescaleDS(
             host=self.HOST,
             user=self.USER,
             password=self.PASSWORD,
@@ -29,7 +29,7 @@ class TestPostgres(unittest.TestCase):
             )
         )
 
-        postgres_ds.df = break_dataset(postgres_ds.df)
+        timescale_ds.df = break_dataset(timescale_ds.df)
 
-        assert len(postgres_ds) == LIMIT
+        assert len(timescale_ds) == LIMIT
 
