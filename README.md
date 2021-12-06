@@ -70,6 +70,37 @@ If you'd like to contribute to the project, refer to the [contributing documenta
 
 Please note that this project is released with a [Contributor Code of Conduct](https://github.com/mindsdb/mindsdb/blob/stable/CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
+## Installing additional dependencies
+
+For some datasources may need additional dependencies.
+
+To work with datasource from list:
+```
+S3, PostgreSQL, MSSQL, MongoDB, Athena, Redshift, Google Cloud Storage, ScyllaDB, Cassandra, Presto, Timescale, Dremio, Impala, Hive, Trino, InfluxDB, Phoenix, QuestDB, CrateDB
+```
+please, install dependencies via:
+```
+pip install mindsdb-datasources[extra_data_sources]
+```
+
+If You want to work with `ScyllaDB`, please install:
+```
+pip install mindsdb-datasources[scylla]
+```
+
+If You want to work with `Cassandra`, please install:
+```
+pip install mindsdb-datasources[cassandra]
+```
+
+Note: dependencies for `Cassandra` and `ScyllaDB` may conflict with each other. It would be good not to install them at the same time.
+
+To work with `Snowflake`, please install `Snowflake's ODBC driver` and `pyodbc`.
+
+To work with `Dremio`, please install the `Dremio ODBC Driver` and `pyodbc`.
+
+To work with `Solr`, please install Solr and `JayDeBeApi`. Then export the Solr JDBC driver to CLASSPATH. Details: https://solr.apache.org/guide/6_6/solr-jdbc-python-jython.html#jaydebeapi
+
 
 ## Mailing lists
 
