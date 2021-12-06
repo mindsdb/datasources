@@ -5,26 +5,24 @@ from mindsdb_datasources.datasources.data_source import SQLDataSource
 
 
 class TrinoDS(SQLDataSource):
-    def __init__(self, query, catalog, schema, user, host='localhost',
-                 port=8080, http_scheme='http', auth=None):
+    def __init__(self, query, user, password, host='localhost',
+                 port=8080, catalog=None, schema='default'):
         super().__init__(query=query)
-        self.catalog = catalog
-        self.schema = schema
         self.user = user
+        self.password = password
         self.host = host
         self.port = int(port)
-        self.http_scheme = http_scheme
-        self.auth = auth
+        self.catalog = catalog
+        self.schema = schema
 
     def query(self, q):
+
         con = trino.dbapi.connect(
             self.host,
             self.port,
             self.user,
-            self.catalog,
-            self.schema,
-            self.http_scheme,
-            self.auth
+            catalog=self.catalog, 
+            schema=self.schema 
         )
 
         df = pd.read_sql(q, con=con)

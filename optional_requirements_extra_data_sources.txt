@@ -1,11 +1,13 @@
 boto3 >= 1.9.0
 crate >= 0.26.0
 PyAthena >= 2.0.0
-google-cloud-storage
-google-auth
+google-cloud-storage >= 1.35.1
+google-auth >=2.3.2
 pymssql >= 2.1.4
-google-cloud-bigquery >= 2.28.1
+google-cloud-bigquery == 2.28.1
 trino >= 0.306.0
 impyla >= 0.17.0
-phoenixdb >= 1.1.0
 pyhive[hive] >= 0.6.4
+influxdb >= 5.3.1
+cx_Oracle >=8.2.1
+presto-python-client >= 0.8.2
