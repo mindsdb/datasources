@@ -17,12 +17,16 @@ class PostgresDS(SQLDataSource):
         self.password = password
 
     def query(self, q):
+        additional_args = {}
+        if 'cockroachlabs.cloud' in self.host:
+            additional_args['ssl_context'] = True
         con = pg8000.connect(
             database=self.database,
             user=self.user,
             password=self.password,
             host=self.host,
-            port=self.port
+            port=self.port,
+            **additional_args
         )
 
         df = pd.read_sql(q, con=con)
