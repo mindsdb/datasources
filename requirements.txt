@@ -11,3 +11,5 @@ moz_sql_parser >= 3.0.0, < 4.1.20329
 pg8000 >= 1.15.3
 pymongo[tls, srv] >= 3.10.1
 certifi
+asn1crypto==1.3.0
+snowflake-connector-python>=2.7.1
