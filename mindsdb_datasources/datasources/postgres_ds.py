@@ -4,9 +4,9 @@ import tempfile
 
 import pandas as pd
 import pg8000
-from mindsdb.utilities.wizards import make_ssl_cert
 
 from mindsdb_datasources.datasources.data_source import SQLDataSource
+from mindsdb_datasources.utilities.ssl import make_ssl_cert
 
 
 class PostgresDS(SQLDataSource):
