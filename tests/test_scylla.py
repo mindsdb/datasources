@@ -1,5 +1,4 @@
 import unittest
-from mindsdb_native import F
 from common import DB_CREDENTIALS, break_dataset
 
 
@@ -34,4 +33,3 @@ class TestScylla(unittest.TestCase):
 
         assert len(scylla_ds) == LIMIT
 
-        F.analyse_dataset(scylla_ds)

@@ -37,7 +37,7 @@ class ClickhouseDS(SQLDataSource):
         try:
             data = response.json()['data']
         except Exception:
-            raise Exception('Got an invalid response from the database: {response.text}')
+            raise Exception(f'Got an invalid response from the database: {response.text}')
 
         df = pd.DataFrame(data)
 

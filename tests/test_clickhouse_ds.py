@@ -4,7 +4,6 @@ import string
 import unittest
 import requests
 from common import DB_CREDENTIALS, break_dataset
-from mindsdb_native import Predictor, F
 import gc
 
 
@@ -54,8 +53,8 @@ class TestClickhouse(unittest.TestCase):
         # mess with the values inside then try to analyze it
         clickhouse_ds.df = break_dataset(clickhouse_ds.df)
         assert len(clickhouse_ds) <= LIMIT
-        F.analyse_dataset(from_data=clickhouse_ds)
 
+    @unittest.skip("Skip untill we move to Lightwood")
     def test_database_history(self):
         return
         from mindsdb_datasources import ClickhouseDS

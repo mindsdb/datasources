@@ -1,9 +1,12 @@
+import ssl
 import os
+import tempfile
 
 import pandas as pd
 import pg8000
 
 from mindsdb_datasources.datasources.data_source import SQLDataSource
+from mindsdb_datasources.utilities.ssl import make_ssl_cert
 
 
 class PostgresDS(SQLDataSource):
@@ -17,16 +20,29 @@ class PostgresDS(SQLDataSource):
         self.password = password
 
     def query(self, q):
+        additional_args = {}
+        if 'cockroachlabs.cloud' in self.host:
+            cert_path = tempfile.mkstemp(prefix='mindsdb_cert_', text=True)[1]
+            make_ssl_cert(cert_path)
+
+            ssl_context = ssl.SSLContext()
+            ssl_context.load_cert_chain(cert_path)
+            additional_args['ssl_context'] = ssl_context
+
         con = pg8000.connect(
             database=self.database,
             user=self.user,
             password=self.password,
             host=self.host,
-            port=self.port
+            port=self.port,
+            **additional_args
         )
 
         df = pd.read_sql(q, con=con)
         con.close()
+
+        if 'cockroachlabs.cloud' in self.host:
+            os.remove(cert_path)
 
         df.columns = [x if isinstance(x, str) else x.decode('utf-8') for x in df.columns]
         for col_name in df.columns:
