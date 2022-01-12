@@ -32,7 +32,8 @@ class SnowflakeDS(SQLDataSource):
             database=self.database,
             schema=self.schema,
             protocol=self.protocol,
-            port=self.port
+            port=self.port,
+            application='MindsDB'
         )
         # Create a cursor object.
         cur = con.cursor(DictCursor)
