@@ -12,6 +12,7 @@ import pandas as pd
 import requests
 
 from mindsdb_datasources.datasources.data_source import DataSource
+from mindsdb_datasources.utilities.sql import query_df
 
 
 def clean_row(row):
@@ -29,16 +30,17 @@ accepted_csv_delimiters = [',', '\t', ';']
 
 
 class FileDS(DataSource):
-    def __init__(self, file, clean_rows=True, custom_parser=None):
+    def __init__(self, file, clean_rows=True, custom_parser=None, query=None):
         """
         Setup from file
         :param file: fielpath or url
         :param clean_rows: if you want to clean rows for strange null values
         :param custom_parser: if you want to parse the file with some custom parser
+        :param query: filter for file
         """
         if not isinstance(file, str):
             raise ValueError("'file' must be string")
-        super().__init__()
+        super().__init__(query=query)
         self.file = file
         self.clean_rows = clean_rows
         self.custom_parser = custom_parser
@@ -97,15 +99,21 @@ class FileDS(DataSource):
         col_map = dict((col, col) for col in header)
         return pd.DataFrame(file_list_data, columns=header), col_map
 
-    def query(self, q=None):
+    def query(self, query=None):
         try:
-            return self._handle_source()
+            df, col_map = self._handle_source()
         except Exception as e:
             print(f"Error creating dataframe from handled data: {e}")
             print("pd.read_csv data handler would be used.")
             df = pd.read_csv(self.file, sep=self.dialect.delimiter)
             col_map = dict((col, col) for col in df.columns)
+        if query is None:
             return df, col_map
+
+        result_df = query_df(df, query)
+
+        col_map = dict((col, col) for col in result_df.columns)
+        return result_df, col_map
 
     def _getDataIo(self, file):
         """
