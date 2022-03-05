@@ -13,3 +13,5 @@ pymongo[tls, srv] >= 3.10.1
 certifi
 asn1crypto==1.3.0
 snowflake-connector-python>=2.7.1
+duckdb == 0.3.1
+mindsdb-sql >= 0.1.0, < 0.2.0
