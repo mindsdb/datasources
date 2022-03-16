@@ -1,45 +1,38 @@
 import pandas as pd
-import requests
+import clickhouse_driver
 
 from mindsdb_datasources.datasources.data_source import SQLDataSource
 
 
 class ClickhouseDS(SQLDataSource):
-    def __init__(self, query, host='localhost', user='default', password=None,
-                 port=8123, protocol='http'):
+
+    def __init__(self,
+                 query,
+                 database='default',
+                 host='localhost',
+                 user='default',
+                 password='',
+                 port=9000):
 
         if ' format ' in query.lower():
-            raise Exception('Please refrain from adding a "FORMAT" statement to the query')
+            raise Exception(
+                'Please refrain from adding a "FORMAT" statement to the query')
 
         super().__init__(query)
 
+        self.database = database
         self.host = host
+        self.port = int(port)
         self.user = user
         self.password = password
-        self.port = int(port)
-        self.protocol = protocol
-
-        if protocol not in ('https', 'http'):
-            raise ValueError('Unexpected protocol {}'.fomat(protocol))
 
     def query(self, q):
-        q = '{} FORMAT JSON'.format(q.rstrip(" ;\n"))
-        params = {'user': self.user}
-        if self.password is not None:
-            params['password'] = self.password
-
-        response = requests.post(
-            f'{self.protocol}://{self.host}:{self.port}',
-            data=q,
-            params=params
-        )
-
-        try:
-            data = response.json()['data']
-        except Exception:
-            raise Exception(f'Got an invalid response from the database: {response.text}')
-
-        df = pd.DataFrame(data)
+        with clickhouse_driver.connect(host=self.host,
+                                       port=self.port,
+                                       database=self.database,
+                                       user=self.user,
+                                       password=self.password) as con:
+            df = pd.read_sql(q, con=con)
 
         return df, self._make_colmap(df)
 
