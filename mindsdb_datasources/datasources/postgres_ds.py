@@ -15,6 +15,12 @@ class PostgresDS(SQLDataSource):
         self.user = user
         self.password = password
 
+    def execute(self, query):
+        with psycopg.connect(f'host={self.host} port={self.port} dbname={self.database} user={self.user} password={self.password}', connect_timeout=10) as conn:
+            with conn.cursor() as cur:
+                cur.execute(query)
+                conn.commit()
+
     def query(self, q):
         with psycopg.connect(f'host={self.host} port={self.port} dbname={self.database} user={self.user} password={self.password}', connect_timeout=10) as con:
             df = pd.read_sql(q, con=con)

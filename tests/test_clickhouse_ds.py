@@ -23,7 +23,8 @@ class TestClickhouse(unittest.TestCase):
         self.USER = DB_CREDENTIALS['clickhouse']['user']
         self.PASSWORD = DB_CREDENTIALS['clickhouse']['password']
         self.HOST = DB_CREDENTIALS['clickhouse']['host']
-        self.PORT = int(DB_CREDENTIALS['clickhouse']['port'])
+        # TEMP
+        self.PORT = 9000 # int(DB_CREDENTIALS['clickhouse']['port'])
         self.DATABASE = 'test_data'
 
 
