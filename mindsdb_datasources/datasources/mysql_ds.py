@@ -19,7 +19,7 @@ class MySqlDS(SQLDataSource):
         self.ssl_cert = ssl_cert
         self.ssl_key = ssl_key
 
-    def query(self, q):
+    def _get_connection_config(self):
         config = {
             "host": self.host,
             "port": self.port,
@@ -35,6 +35,17 @@ class MySqlDS(SQLDataSource):
                 config["ssl_cert"] = self.ssl_cert
             if self.ssl_key is not None:
                 config["ssl_key"] = self.ssl_key
+        return config
+
+    def execute(self, query):
+        config = self._get_connection_config()
+        with mysql.connector.connect(**config) as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query)
+                conn.commit()
+
+    def query(self, q):
+        config = self._get_connection_config()
         con = mysql.connector.connect(**config)
 
         df = pd.read_sql(q, con=con)
