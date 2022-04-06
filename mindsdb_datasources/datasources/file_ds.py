@@ -254,6 +254,12 @@ class FileDS(DataSource):
             with open(file_path) as csvfile:
                 csv_reader = csv.reader(csvfile, delimiter=dialect.delimiter)
                 self._column_names = next(csv_reader, None)
+
+                # file in utf-8-sig starts with FEFF
+                self._column_names = [
+                    col.strip('\ufeff')
+                    for col in self._column_names
+                ]
                 self._row_count = sum(1 for line in csv_reader)
         else:
             df = self.df
