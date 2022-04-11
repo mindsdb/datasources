@@ -14,5 +14,5 @@ certifi
 asn1crypto==1.3.0
 snowflake-connector-python>=2.7.1
 duckdb == 0.3.1
-mindsdb-sql >= 0.2.0, < 0.3.0
+mindsdb-sql >= 0.3.0, < 0.4.0
 clickhouse-driver >= 0.2.3
