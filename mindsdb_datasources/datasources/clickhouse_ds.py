@@ -32,6 +32,8 @@ class ClickhouseDS(SQLDataSource):
         params = {'user': self.user}
         if self.password is not None:
             params['password'] = self.password
+        if self.database is not None:
+            params['database'] = self.database
     
         response = requests.post(
             f'{self.protocol}://{self.host}:{self.port}',
